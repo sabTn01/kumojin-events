@@ -1,0 +1,53 @@
+<div class="container">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <button mat-fab *ngIf="!displayForm" (click)="onDisplayForm()" color="primary" class="add-button">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button mat-fab *ngIf="displayForm" (click)="onDisplayForm()" color="primary" class="add-button">
+    <mat-icon>remove</mat-icon>
+  </button>
+
+  <mat-card *ngIf="displayForm">
+    <mat-card-title>Add new event</mat-card-title>
+    <mat-card-content>
+      <app-kumojin-event-form (saveComplete$)="onSaveComplete()"></app-kumojin-event-form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="!isLoading">
+    <mat-card-title>Events</mat-card-title>
+    <mat-card-content>
+      <table mat-table [dataSource]="events" class="mat-elevation-z8 full-width">
+
+        <!-- Position displayName -->
+        <ng-container matColumnDef="displayName">
+          <th mat-header-cell *matHeaderCellDef> Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.displayName}} </td>
+        </ng-container>
+
+        <!-- Position description -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description</th>
+          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <!-- Position startAt -->
+        <ng-container matColumnDef="startAt">
+          <th mat-header-cell *matHeaderCellDef> Start At</th>
+          <td mat-cell *matCellDef="let element"> {{element.startAt | eventDatePipe}} </td>
+        </ng-container>
+
+        <!-- Position endAt -->
+        <ng-container matColumnDef="endAt">
+          <th mat-header-cell *matHeaderCellDef> End At</th>
+          <td mat-cell *matCellDef="let element"> {{element.endAt | eventDatePipe}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

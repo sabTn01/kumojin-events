@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Kumojin.Backend.Domain\Kumojin.Backend.Domain.csproj" />
+      <ProjectReference Include="..\Kumojin.Backend.Infrastructure\Kumojin.Backend.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="10.4.0" />
+    </ItemGroup>
+
+</Project>

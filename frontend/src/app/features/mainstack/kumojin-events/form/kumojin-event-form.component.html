@@ -1,0 +1,85 @@
+<form #form='ngForm' (ngSubmit)="onSaveClick()">
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="kumojinEvent.displayName"
+             [required]="true"
+             name="name">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="kumojinEvent.description"
+                [required]="true"
+                name="description"></textarea>
+    </mat-form-field>
+  </p>
+
+  <table>
+    <tr>
+      <td>
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput [(ngModel)]="kumojinEvent.startAt"
+                 [ngxMatDatetimePicker]="pickerStart"
+                 [required]="true"
+                 name="startAt">
+          <mat-datepicker-toggle matSuffix [for]="$any(pickerStart)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #pickerStart [showSpinners]="true"
+                                   [showSeconds]="false"
+                                   [stepHour]="1"
+                                   [stepMinute]="15"
+                                   [stepSecond]="30"
+                                   [defaultTime]="[0]"
+                                   [enableMeridian]="true"
+                                   [color]="'primary'">
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput [(ngModel)]="kumojinEvent.endAt"
+                 [ngxMatDatetimePicker]="pickerEnd"
+                 [min]="kumojinEvent.startAt"
+                 [required]="true"
+                 [disabled]="kumojinEvent.startAt === undefined"
+                 name="endAt">
+          <mat-datepicker-toggle matSuffix [for]="$any(pickerEnd)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #pickerEnd [showSpinners]="true"
+                                   [showSeconds]="false"
+                                   [stepHour]="1"
+                                   [stepMinute]="15"
+                                   [stepSecond]="30"
+                                   [defaultTime]="[0]"
+                                   [enableMeridian]="true"
+                                   [color]="'primary'">
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+
+
+
+  <!--  <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Country</mat-label>
+        <mat-select [(ngModel)]="kumojinEvent.countryAt">
+          <mat-option *ngFor="let country of countries"
+                      name="countryAt">
+            {{country}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>-->
+
+  <button mat-raised-button [disabled]="isLoading || form.invalid"
+          color="primary" type="submit">Save
+  </button>
+</form>
+
+
