@@ -1,9 +1,10 @@
 <form #form='ngForm' (ngSubmit)="onSaveClick()">
   <p>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="c">
       <mat-label>Name</mat-label>
       <input matInput [(ngModel)]="kumojinEvent.displayName"
              [required]="true"
+             [maxLength]="32"
              name="name">
     </mat-form-field>
   </p>
@@ -62,7 +63,6 @@
       </td>
     </tr>
   </table>
-
 
 
   <!--  <p>
